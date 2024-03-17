@@ -24,6 +24,7 @@ LOCAL_SYSTEM_EXT_MODULE := true
 LOCAL_OVERRIDES_PACKAGES := Browser2
 LOCAL_SRC_FILES := prebuilt/$(TARGET_ARCH)_TrichromeChrome6432.apk.xz.001
 LOCAL_REQUIRED_MODULES := TrichromeLibrary6432
+LOCAL_OPTIONAL_USES_LIBRARIES := androidx.window.extensions android.ext.adservices
 include vendor/leaf/build/core/7z_prebuilt.mk
 
 include $(CLEAR_VARS)
@@ -44,4 +45,5 @@ LOCAL_SYSTEM_EXT_MODULE := true
 LOCAL_OVERRIDES_PACKAGES := webview
 LOCAL_SRC_FILES := prebuilt/$(TARGET_ARCH)_TrichromeWebView6432.apk.xz.001
 LOCAL_REQUIRED_MODULES := TrichromeLibrary6432
+LOCAL_OPTIONAL_USES_LIBRARIES := androidx.window.extensions android.ext.adservices
 include vendor/leaf/build/core/7z_prebuilt.mk
