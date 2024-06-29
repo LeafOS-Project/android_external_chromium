@@ -76,7 +76,6 @@ android_app_import {
     required: ["TrichromeLibrary6432"],
     optional_uses_libs: [
         "androidx.window.extensions",
-        "android.ext.adservices",
     ],
 }
 
@@ -118,6 +117,5 @@ android_app_import {
     required: ["TrichromeLibrary6432"],
     optional_uses_libs: [
         "androidx.window.extensions",
-        "android.ext.adservices",
     ],
 }
