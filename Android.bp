@@ -1,0 +1,123 @@
+//
+// Copyright (C) 2024 The LeafOS Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+genrule {
+    name: "gen_TrichromeChrome6432_arm64",
+    defaults: ["7z_genrule_defaults"],
+    srcs: ["prebuilt/arm64_TrichromeChrome6432.apk.*"],
+    out: ["TrichromeChrome6432.apk"],
+}
+
+genrule {
+    name: "gen_TrichromeChrome6432_x86_64",
+    defaults: ["7z_genrule_defaults"],
+    srcs: ["prebuilt/x86_64_TrichromeChrome6432.apk.*"],
+    out: ["TrichromeChrome6432.apk"],
+}
+
+genrule {
+    name: "gen_TrichromeLibrary6432_arm64",
+    defaults: ["7z_genrule_defaults"],
+    srcs: ["prebuilt/arm64_TrichromeLibrary6432.apk.*"],
+    out: ["TrichromeLibrary6432.apk"],
+}
+
+genrule {
+    name: "gen_TrichromeLibrary6432_x86_64",
+    defaults: ["7z_genrule_defaults"],
+    srcs: ["prebuilt/x86_64_TrichromeLibrary6432.apk.*"],
+    out: ["TrichromeLibrary6432.apk"],
+}
+
+genrule {
+    name: "gen_TrichromeWebView6432_arm64",
+    defaults: ["7z_genrule_defaults"],
+    srcs: ["prebuilt/arm64_TrichromeWebView6432.apk.*"],
+    out: ["TrichromeWebView6432.apk"],
+}
+
+genrule {
+    name: "gen_TrichromeWebView6432_x86_64",
+    defaults: ["7z_genrule_defaults"],
+    srcs: ["prebuilt/x86_64_TrichromeWebView6432.apk.*"],
+    out: ["TrichromeWebView6432.apk"],
+}
+
+android_app_import {
+    name: "TrichromeChrome6432",
+    system_ext_specific: true,
+    overrides: ["Browser2"],
+    preprocessed: true,
+    presigned: true,
+    arch: {
+        arm64: {
+            apk: ":gen_TrichromeChrome6432_arm64",
+        },
+        x86_64: {
+            apk: ":gen_TrichromeChrome6432_x86_64",
+        },
+    },
+    dex_preopt: {
+        enabled: false,
+    },
+    required: ["TrichromeLibrary6432"],
+    optional_uses_libs: [
+        "androidx.window.extensions",
+        "android.ext.adservices",
+    ],
+}
+
+android_app_import {
+    name: "TrichromeLibrary6432",
+    system_ext_specific: true,
+    preprocessed: true,
+    presigned: true,
+    arch: {
+        arm64: {
+            apk: ":gen_TrichromeLibrary6432_arm64",
+        },
+        x86_64: {
+            apk: ":gen_TrichromeLibrary6432_x86_64",
+        },
+    },
+    dex_preopt: {
+        enabled: false,
+    },
+}
+
+android_app_import {
+    name: "TrichromeWebView6432",
+    system_ext_specific: true,
+    overrides: ["webview"],
+    preprocessed: true,
+    presigned: true,
+    arch: {
+        arm64: {
+            apk: ":gen_TrichromeWebView6432_arm64",
+        },
+        x86_64: {
+            apk: ":gen_TrichromeWebView6432_x86_64",
+        },
+    },
+    dex_preopt: {
+        enabled: false,
+    },
+    required: ["TrichromeLibrary6432"],
+    optional_uses_libs: [
+        "androidx.window.extensions",
+        "android.ext.adservices",
+    ],
+}
